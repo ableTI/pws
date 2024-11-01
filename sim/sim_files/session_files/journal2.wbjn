@@ -1,0 +1,168 @@
+# encoding: utf-8
+# 2024 R2
+SetScriptVersion(Version="24.2.133")
+template1 = GetTemplate(TemplateName="Mesh")
+system1 = GetSystem(Name="Geom 1")
+system2 = template1.CreateSystem(
+    Position="Below",
+    RelativeTo=system1)
+geometryComponent1 = system2.GetComponent(Name="Geometry")
+geometryComponent2 = system1.GetComponent(Name="Geometry")
+geometryComponent1.ReplaceWithShare(
+    TargetSystem=system2,
+    ComponentToShare=geometryComponent2,
+    SourceSystem=system1)
+template2 = GetTemplate(TemplateName="Mechanical APDL")
+system3 = template2.CreateSystem(
+    Position="Right",
+    RelativeTo=system2)
+template3 = GetTemplate(TemplateName="EngData")
+system4 = template3.CreateSystem(
+    Position="Below",
+    RelativeTo=system2)
+template4 = GetTemplate(TemplateName="Mechanical Model")
+system5 = template4.CreateSystem(
+    Position="Right",
+    RelativeTo=system4)
+engineeringDataComponent1 = system5.GetComponent(Name="Engineering Data")
+engineeringDataComponent2 = system4.GetComponent(Name="Engineering Data")
+engineeringDataComponent1.ReplaceWithShare(
+    TargetSystem=system5,
+    ComponentToShare=engineeringDataComponent2,
+    SourceSystem=system4)
+system4.Delete()
+system2.Delete()
+system6 = template4.CreateSystem(
+    Position="Below",
+    RelativeTo=system1)
+system3.Delete()
+system7 = GetSystem(Name="SYS")
+system7.Delete()
+system6.Delete()
+system8 = template3.CreateSystem(
+    Position="Below",
+    RelativeTo=system1)
+engineeringDataComponent3 = system8.GetComponent(Name="Engineering Data")
+engineeringDataComponent1.ReplaceWithShare(
+    TargetSystem=system5,
+    ComponentToShare=engineeringDataComponent3,
+    SourceSystem=system8)
+geometryComponent3 = system5.GetComponent(Name="Geometry")
+geometryComponent3.ReplaceWithShare(
+    TargetSystem=system5,
+    ComponentToShare=geometryComponent2,
+    SourceSystem=system1)
+template5 = GetTemplate(TemplateName="External Model")
+system9 = template5.CreateSystem(
+    Position="Below",
+    RelativeTo=system8)
+system9.Delete()
+template6 = GetTemplate(
+    TemplateName="Static Structural",
+    Solver="ANSYS")
+system10 = template6.CreateSystem(
+    Position="Right",
+    RelativeTo=system5)
+modelComponent1 = system5.GetComponent(Name="Model")
+modelComponent2 = system10.GetComponent(Name="Model")
+modelComponent1.TransferData(TargetComponent=modelComponent2)
+modelComponent1.Refresh()
+model1 = system5.GetContainer(ComponentName="Model")
+model1.Edit()
+system5.Delete()
+system10.Delete()
+system11 = template6.CreateSystem(
+    Position="Right",
+    RelativeTo=system1)
+geometryComponent4 = system11.GetComponent(Name="Geometry")
+geometryComponent4.ReplaceWithShare(
+    TargetSystem=system11,
+    ComponentToShare=geometryComponent2,
+    SourceSystem=system1)
+engineeringDataComponent4 = system11.GetComponent(Name="Engineering Data")
+engineeringDataComponent4.ReplaceWithShare(
+    TargetSystem=system11,
+    ComponentToShare=engineeringDataComponent3,
+    SourceSystem=system8)
+system12 = template2.CreateSystem(
+    Position="Right",
+    RelativeTo=system8)
+system12.Delete()
+system13 = template2.CreateSystem(
+    Position="Right",
+    RelativeTo=system11)
+system13.Delete()
+template7 = GetTemplate(TemplateName="Material Designer")
+system14 = template7.CreateSystem(
+    Position="Below",
+    RelativeTo=system8)
+system14.Delete()
+projectTemplate1 = GetProjectTemplate(Name="AM LPBF Thermal-Structural")
+projectTemplate1.CreateProject()
+system15 = GetSystem(Name="Transient Thermal (ANSYS)")
+engineeringDataComponent5 = system15.GetComponent(Name="Engineering Data")
+engineeringDataComponent5.ReplaceWithShare(
+    TargetSystem=system15,
+    ComponentToShare=engineeringDataComponent3,
+    SourceSystem=system8)
+geometryComponent5 = system15.GetComponent(Name="Geometry")
+geometryComponent5.ReplaceWithShare(
+    TargetSystem=system15,
+    ComponentToShare=geometryComponent2,
+    SourceSystem=system1)
+projectTemplate2 = GetProjectTemplate(Name="Random Vibration")
+projectTemplate2.CreateProject()
+system16 = GetSystem(Name="Modal (ANSYS)")
+engineeringDataComponent6 = system16.GetComponent(Name="Engineering Data")
+engineeringDataComponent6.ReplaceWithShare(
+    TargetSystem=system16,
+    ComponentToShare=engineeringDataComponent3,
+    SourceSystem=system8)
+geometryComponent6 = system16.GetComponent(Name="Geometry")
+geometryComponent6.ReplaceWithShare(
+    TargetSystem=system16,
+    ComponentToShare=geometryComponent2,
+    SourceSystem=system1)
+Save(Overwrite=True)
+template8 = GetTemplate(
+    TemplateName="ACP",
+    Solver="Pre")
+system17 = GetSystem(Name="Random Vibration (ANSYS)")
+system18 = template8.CreateSystem(
+    Position="Right",
+    RelativeTo=system17)
+system18.Delete()
+template9 = GetTemplate(
+    TemplateName="ACP",
+    Solver="Post")
+system19 = template9.CreateSystem(
+    Position="Right",
+    RelativeTo=system17)
+system19.Delete()
+template10 = GetTemplate(
+    TemplateName="Thermal-Electric",
+    Solver="ANSYS")
+system20 = template10.CreateSystem(
+    Position="Right",
+    RelativeTo=system17)
+system20.Delete()
+template11 = GetTemplate(TemplateName="System Coupling")
+system21 = template11.CreateSystem(
+    Position="Below",
+    RelativeTo=system16)
+system21.Delete()
+template12 = GetTemplate(TemplateName="LSDYNA")
+system22 = template12.CreateSystem(
+    Position="Below",
+    RelativeTo=system16)
+engineeringDataComponent7 = system22.GetComponent(Name="Engineering Data")
+engineeringDataComponent7.ReplaceWithShare(
+    TargetSystem=system22,
+    ComponentToShare=engineeringDataComponent3,
+    SourceSystem=system8)
+geometryComponent7 = system22.GetComponent(Name="Geometry")
+geometryComponent7.ReplaceWithShare(
+    TargetSystem=system22,
+    ComponentToShare=geometryComponent2,
+    SourceSystem=system1)
+Save(Overwrite=True)

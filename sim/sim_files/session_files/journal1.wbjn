@@ -1,0 +1,51 @@
+# encoding: utf-8
+# 2024 R2
+SetScriptVersion(Version="24.2.133")
+template1 = GetTemplate(
+    TemplateName="Static Structural",
+    Solver="ANSYS")
+system1 = template1.CreateSystem()
+favorites1 = EngData.LoadFavoriteItems()
+library1 = EngData.OpenLibrary(
+    Name="ANSYS GRANTA Materials Data for Simulation (Sample)",
+    Source="Granta_Design_Typical_Materials.xml")
+library2 = EngData.OpenLibrary(
+    Name="General Materials",
+    Source="General_Materials.xml")
+library3 = EngData.OpenLibrary(
+    Name="Additive Manufacturing Materials",
+    Source="Additive_Manufacturing_Materials.xml")
+library4 = EngData.OpenLibrary(
+    Name="Geomechanical Materials",
+    Source="GeoMechanical_Materials.xml")
+engineeringData1 = system1.GetContainer(ComponentName="Engineering Data")
+matl1 = engineeringData1.ImportMaterial(
+    Name="Stainless Steel",
+    Source="General_Materials.xml")
+matl1.SetColor(
+    Red=175,
+    Green=158,
+    Blue=169)
+material1 = engineeringData1.GetMaterial(Name="Structural Steel")
+material1.Delete()
+geometry1 = system1.GetContainer(ComponentName="Geometry")
+geometry1.Edit(IsDiscoveryGeometry=True)
+geometry1.Exit()
+template2 = GetTemplate(TemplateName="Geometry")
+system2 = template2.CreateSystem(
+    Position="Right",
+    RelativeTo=system1)
+system3 = template2.CreateSystem(
+    Position="Left",
+    RelativeTo=system1)
+geometryComponent1 = system1.GetComponent(Name="Geometry")
+geometryComponent2 = system3.GetComponent(Name="Geometry")
+geometryComponent1.ReplaceWithShare(
+    TargetSystem=system1,
+    ComponentToShare=geometryComponent2,
+    SourceSystem=system3)
+system2.Delete()
+geometry2 = system1.GetContainer(ComponentName="Geometry")
+geometry2.SetFile(FilePath=GetAbsoluteUserPathName("pws/ontwerp/v3/op-neer_bew_plaat.scdoc"))
+geometry2.Edit(IsSpaceClaimGeometry=True)
+Save(Overwrite=True)
