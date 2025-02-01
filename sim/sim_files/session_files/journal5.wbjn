@@ -1,0 +1,71 @@
+# encoding: utf-8
+# 2024 R2
+SetScriptVersion(Version="24.2.133")
+favorites1 = EngData.LoadFavoriteItems()
+library1 = EngData.OpenLibrary(
+    Name="ANSYS GRANTA Materials Data for Simulation (Sample)",
+    Source="Granta_Design_Typical_Materials.xml")
+library2 = EngData.OpenLibrary(
+    Name="General Materials",
+    Source="General_Materials.xml")
+system1 = GetSystem(Name="ENGD")
+engineeringData1 = system1.GetContainer(ComponentName="Engineering Data")
+matl1 = engineeringData1.ImportMaterial(
+    Name="Titanium Alloy",
+    Source="General_Materials.xml")
+library3 = EngData.OpenLibrary(
+    Name="Magnetic B-H Curves",
+    Source="Magnetic_B-H_curves_Soft_Materials.xml")
+library4 = EngData.OpenLibrary(
+    Name="Thermal Materials",
+    Source="Thermal_Materials.xml")
+matl2 = engineeringData1.ImportMaterial(
+    Name="Steel Stainless",
+    Source="Thermal_Materials.xml")
+library5 = EngData.OpenLibrary(
+    Name="Fluid Materials",
+    Source="Fluid_Materials.xml")
+library6 = EngData.OpenLibrary(
+    Name="Piezoelectric Materials",
+    Source="Piezoelectric_Materials.xml")
+library7 = EngData.OpenLibrary(
+    Name="Composite Materials",
+    Source="Composite_Materials.xml")
+matl3 = engineeringData1.ImportMaterial(
+    Name="Epoxy Carbon UD (230 GPa) Prepreg",
+    Source="Composite_Materials.xml")
+matl4 = engineeringData1.ImportMaterial(
+    Name="Aluminum alloy, wrought, 6061, T6",
+    Source="Granta_Design_Typical_Materials.xml")
+matl5 = engineeringData1.ImportMaterial(
+    Name="Plastic, HDPE",
+    Source="Granta_Design_Typical_Materials.xml")
+matl6 = engineeringData1.ImportMaterial(
+    Name="Cast iron, EN GJL 100",
+    Source="Granta_Design_Typical_Materials.xml")
+matl7 = engineeringData1.ImportMaterial(
+    Name="Plastic, PP (homopolymer, low flow)",
+    Source="Granta_Design_Typical_Materials.xml")
+matl8 = engineeringData1.ImportMaterial(
+    Name="Titanium alloy, Ti-6Al-4V, annealed",
+    Source="Granta_Design_Typical_Materials.xml")
+system2 = GetSystem(Name="SYS")
+modelComponent1 = system2.GetComponent(Name="Model")
+modelComponent1.Refresh()
+model1 = system2.GetContainer(ComponentName="Model")
+model1.Edit()
+Rep.ResetProjectId()
+model1.Exit()
+matl6.Delete()
+matl8.Delete()
+matl1.Delete()
+matl7.Delete()
+matl5.Delete()
+matl3.Delete()
+matl2.Delete()
+material1 = engineeringData1.GetMaterial(Name="Structural Steel")
+material1.Delete()
+modelComponent1.Refresh()
+model1.Edit()
+Save(Overwrite=True)
+model1.Exit()

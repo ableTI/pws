@@ -1,0 +1,2 @@
+structural steel: 9,4291e8 Pa / -4,1939e9 Pa
+titanium alloy: 
