@@ -1,2 +1,44 @@
-structural steel: 9,4291e8 Pa / -4,1939e9 Pa
-titanium alloy: 
+20deg celcius
+30000N
+
+CAM V8
+bron data Tensile Strengt: ansys eneneering datasources
+Structural Steel(metal): 5,6575e8 Pa / -2,5163e9 Pa
+			2,5E+08 Pa Tensile Yield Strength
+			4,6E+08 Pa Tensile Ultimate Strength
+			7850 kg*m-3
+Titanium Alloy(metal): 5,6506e8 Pa / -2,5053e9 Pa
+			9,3E+08 Pa Tensile Yield Strength
+			1,07E+09 Pa Tensile Ultimate Strength
+			4620 kg*m-3
+Alumininum Alloy(metal): 5,6463e8 Pa / -2,5128e9 Pa
+			2,8E+08 Pa Tensile Yield Strength
+			3,1E+08 Pa Tensile Ultimate Strength
+			2770 kg*m-3
+Stainless Steel(metal): 5,6352e8 Pa / -2,5155e9 Pa
+			2,07E+08 Pa Tensile Yield Strength
+			5,86E+08 Pa Tensile Ultimate Strength
+			7750 kg*m-3
+Polyethylene(plastic): 5,589e8 Pa / -2,4662e9 Pa
+			 2,5E+07Pa Tensile Yield Strength
+			 3,3E+07Pa Tensile Ultimate Strength
+			 950 kg*m-3
+Plastic, ABS(plastic): 5,6102e8	Pa/ -2,4773e9 Pa
+			 2,772E+07 Pa Tensile Yield Strength
+			 3,813E+07 Pa Tensile Ultimate Strength
+			 1030 kg*m-3
+Wood, oak(organic): 5,646e8 Pa / -2,4997e9 Pa
+			~4,5E+07 Pa Tensile Yield Strength
+			~1,45E+08 Pa Tensile Ultimate Strength
+			 925,7 kg*m-3
+
+Geen één heeft genoeg kracht, data sim output is overal bijna gelijk. Niet nodig om de heletijd herhalen.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CAM V9 : 4,8422e8 Pa / -4,7053e8 Pa --> 4,8422e8 Pa
+dus mogelijke materiaalen:	
+	Titanium Alloy
+	Stainless Steel (buigt wel permanent)
+	Structural Steel (buigt ook permanent)
+
+dus: Titanium Alloy
