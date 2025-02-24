@@ -1,0 +1,95 @@
+# encoding: utf-8
+# 2024 R2
+SetScriptVersion(Version="24.2.133")
+system1 = GetSystem(Name="SYS")
+resultsComponent1 = system1.GetComponent(Name="Results")
+resultsComponent1.Clean()
+solutionComponent1 = system1.GetComponent(Name="Solution")
+solutionComponent1.Clean()
+solution1 = system1.GetContainer(ComponentName="Solution")
+solution1.Edit()
+model1 = system1.GetContainer(ComponentName="Model")
+model1.Exit()
+fieldVariable1 = GetDataEntity("/Engineering Data/FieldVariableDataObject:Temperature 3")
+fieldVariable1.DataString = "20 [C]"
+fieldVariable2 = GetDataEntity("/Engineering Data/FieldVariableDataObject:Mean Stress 3")
+fieldVariable2.Unit = "MPa"
+modelComponent1 = system1.GetComponent(Name="Model")
+modelComponent1.Refresh()
+model1.Edit()
+model1.Exit()
+fieldVariable2.Unit = "Pa"
+system2 = GetSystem(Name="ENGD")
+engineeringData1 = system2.GetContainer(ComponentName="Engineering Data")
+material1 = engineeringData1.GetMaterial(Name="Structural Steel")
+material1.Delete()
+favorites1 = EngData.LoadFavoriteItems()
+library1 = EngData.OpenLibrary(
+    Name="General Materials",
+    Source="General_Materials.xml")
+matl1 = engineeringData1.ImportMaterial(
+    Name="Titanium Alloy",
+    Source="General_Materials.xml")
+modelComponent1.Update(AllDependencies=True)
+model1.Edit()
+matl1.Delete()
+matl2 = engineeringData1.ImportMaterial(
+    Name="Aluminum Alloy",
+    Source="General_Materials.xml")
+library2 = EngData.OpenLibrary(
+    Name="Additive Manufacturing Materials",
+    Source="Additive_Manufacturing_Materials.xml")
+library3 = EngData.OpenLibrary(
+    Name="Geomechanical Materials",
+    Source="GeoMechanical_Materials.xml")
+library4 = EngData.OpenLibrary(
+    Name="Composite Materials",
+    Source="Composite_Materials.xml")
+library5 = EngData.OpenLibrary(
+    Name="Explicit Materials",
+    Source="Explicit_Materials.xml")
+library6 = EngData.OpenLibrary(
+    Name="General Non-linear Materials",
+    Source="General Materials Non-linear.xml")
+library7 = EngData.OpenLibrary(
+    Name="Thermal Materials",
+    Source="Thermal_Materials.xml")
+library8 = EngData.OpenLibrary(
+    Name="ANSYS GRANTA Materials Data for Simulation (Sample)",
+    Source="Granta_Design_Typical_Materials.xml")
+matl3 = engineeringData1.ImportMaterial(
+    Name="Wood, Oak",
+    Source="Granta_Design_Typical_Materials.xml")
+matl4 = engineeringData1.ImportMaterial(
+    Name="Aluminum Alloy",
+    Source="General_Materials.xml")
+matl3.Delete()
+matl4.Delete()
+modelComponent1.Refresh()
+model1.Edit()
+model1.Exit()
+material2 = engineeringData1.GetMaterial(Name="Aluminum Alloy 2")
+material2.Delete()
+matl2.Delete()
+matl5 = engineeringData1.ImportMaterial(
+    Name="Stainless Steel",
+    Source="General_Materials.xml")
+modelComponent1.Refresh()
+model1.Edit()
+model1.Exit()
+material3 = engineeringData1.GetMaterial(Name="Stainless Steel NL")
+material3.Delete()
+matl5.Delete()
+material4 = engineeringData1.GetMaterial(Name="Polyethylene")
+material4.Delete()
+matl6 = engineeringData1.ImportMaterial(
+    Name="Plastic, ABS (high-impact)",
+    Source="Granta_Design_Typical_Materials.xml")
+matl7 = engineeringData1.ImportMaterial(
+    Name="Plastic, ABS (high-impact)",
+    Source="Granta_Design_Typical_Materials.xml")
+matl7.Delete()
+modelComponent1.Refresh()
+model1.Edit()
+model1.Exit()
+Save(Overwrite=True)
